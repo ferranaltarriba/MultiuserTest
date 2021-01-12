@@ -74,6 +74,13 @@
 	
 	  // Code for joining session with someone else's code
 		
+		$('#codeinput').on('input', function() {
+			var c = $('#codeinput').val();
+			alert("code is :");
+			alert(c);
+		});
+		
+		
       document.getElementById("codeinput").addEventListener("change", function (event) {
 		  var c = document.getElementById("codeinput").value;
 		  alert("code is :");
