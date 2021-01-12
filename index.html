@@ -78,7 +78,7 @@
 		$('#codesubmit').on('click', function() {
 			var c = $('#codeinput').val();
 			socket.emit("join", c);
-			alert(c);
+			alert("You are now in room "+c);
 		});
 		
 		/*
