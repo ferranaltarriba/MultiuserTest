@@ -21,7 +21,7 @@
 
     <!-- Client Code    -->
     <script type="text/javascript">
-alert("hey");
+
 		//Define random room code
 		
 		function makeid(length) {
@@ -35,8 +35,7 @@ alert("hey");
 		}		
 		var randomCode = makeid(5);
 		$('#room_code').text(randomCode);	
-		
-	alert("hey2");	
+			
       // Get WebSocket
       var socket = io();
 
@@ -74,16 +73,16 @@ alert("hey");
 		
 	
 	  // Code for joining session with someone else's code
-	/*	
+		
       document.getElementById("codeinput").addEventListener("change", function (event) {
 		  alert("code entered")
-		  var c = document.getElementById("codeinput").value;
+		 /* var c = document.getElementById("codeinput").value;
 		  alert("code is :");
 		  alert(c);
           socket.emit("join", c);
-          socket.emit("joinedroom", "joinedroom");
+          socket.emit("joinedroom", "joinedroom");*/
       });
-
+/*
       socket.on("joinedroom", function (message) {
         alert(message);
       });
