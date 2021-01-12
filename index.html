@@ -2,11 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>SocketIO Client</title>
+    <title>PlaceMap</title>
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
 
+	<!-- Room code mechanism -->  
+	<p>Share this code with your friends:</p>
+	<br/>
+	<p id="room_code"></p>
+	  
     <!-- File input a nd image output -->
     <input type="file" id="input">
     <img src="" id="output">
@@ -14,6 +19,23 @@
     <!-- Client Code    -->
     <script type="text/javascript">
 
+		//Define random room code
+		
+		function makeid(length) {
+		   var result           = '';
+		   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		   var charactersLength = characters.length;
+		   for ( var i = 0; i < length; i++ ) {
+			  result += characters.charAt(Math.floor(Math.random() * charactersLength));
+		   }
+		   return result;
+		}
+		
+		
+		var randomCode = makeid(5);
+		alert(randomCode);
+	
+		
       // Get WebSocket
       var socket = io();
 
