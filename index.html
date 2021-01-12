@@ -40,6 +40,8 @@
       // Get WebSocket
       var socket = io();
 
+		alert("before");
+		
       // Get DOM elements
       var input = document.getElementById("input");
       var output = document.getElementById("output");
@@ -47,7 +49,7 @@
       // Join a channel
       var room = roomCode;
 		
-		alert("before");
+		
       socket.emit("join", room);
 		
 		alert("the room is: ");
