@@ -81,8 +81,7 @@ alert("hey");
 		  alert(c);
           socket.emit("join", c);
           socket.emit("joinedroom", "joinedroom");*/
-      };
-
+      })
 
       socket.on("joinedroom", function (message) {
         alert(message);
