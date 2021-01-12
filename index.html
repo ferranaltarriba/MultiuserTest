@@ -35,8 +35,6 @@
 		$('#room_code').text(randomCode);	
 		
 		
-		alert("evenbefore");
-		
       // Get WebSocket
       var socket = io();
 
@@ -47,7 +45,7 @@
       var output = document.getElementById("output");
 		
       // Join a channel
-      var room = roomCode;
+      var room = randomCode;
 		
 		alert("before");
       socket.emit("join", room);
