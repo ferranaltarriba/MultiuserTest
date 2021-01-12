@@ -44,6 +44,8 @@
       // Join a channel
       var room = roomCode;
       socket.emit("join", room);
+		
+		alert("the room is: "+io.sockets.adapter.get('roomId'))
 
       // Listen to file input events
       document.getElementById("input").addEventListener("change", function (event) {
