@@ -74,20 +74,20 @@
 	
 	  // Code for joining session with someone else's code
 		
-		$('#codeinput').on('input', function() {
+		$('#codeinput').on('submit', function() {
 			var c = $('#codeinput').val();
 			alert("code is :");
 			alert(c);
 		});
 		
-		
+		/*
       document.getElementById("codeinput").addEventListener("change", function (event) {
 		  var c = document.getElementById("codeinput").value;
 		  alert("code is :");
 		  alert(c);
-          /* socket.emit("join", c);
-          socket.emit("joinedroom", "joinedroom");*/
-      });
+           socket.emit("join", c);
+          socket.emit("joinedroom", "joinedroom");
+      });*/
 /*
       socket.on("joinedroom", function (message) {
         alert(message);
