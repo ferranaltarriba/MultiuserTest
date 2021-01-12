@@ -77,7 +77,7 @@
 		
 		$('#codesubmit').on('click', function() {
 			var c = $('#codeinput').val();
-			alert("code is :");
+			socket.emit("join", c);
 			alert(c);
 		});
 		
