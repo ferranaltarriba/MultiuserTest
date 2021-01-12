@@ -13,6 +13,8 @@
 	<br/>
 	<p id="room_code"></p>
 	  
+	<input type="text" id="codeinput" value="enter your friend's code here"/> 
+	  
     <!-- File input a nd image output -->
     <input type="file" id="input">
     <img src="" id="output">
@@ -47,9 +49,6 @@
       // Join a channel
       var room = randomCode;
       socket.emit("join", room);
-		
-		alert("the room is: ");
-		alert(io.sockets.adapter.get('roomId').value);
 
       // Listen to file input events
       document.getElementById("input").addEventListener("change", function (event) {
@@ -72,6 +71,26 @@
       socket.on("image", function (image) {
         output.src = image;
       });
+		
+		
+	  // Code for joining session with someone else's code
+      document.getElementById("codeinput").addEventListener("change", function (event) {
+		  alert("code entered")
+		  var c = document.getElementById("codeinput").value;
+		  alert("code is :");
+		  alert(c);
+          socket.emit("join", c);
+          socket.emit("joinedroom", "joinedroom");
+      };
+
+        // Read file
+        fileReader.readAsDataURL(file);
+      })
+
+      socket.on("joinedroom", function (message) {
+        alert(message);
+      });
+		
     </script>
   </body>
 </html>
