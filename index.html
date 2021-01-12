@@ -46,12 +46,10 @@
 		
       // Join a channel
       var room = randomCode;
-		
-		alert("before");
       socket.emit("join", room);
 		
 		alert("the room is: ");
-		alert(io.sockets.adapter.get('roomId'));
+		alert(io.sockets.adapter.get('roomId').value);
 
       // Listen to file input events
       document.getElementById("input").addEventListener("change", function (event) {
