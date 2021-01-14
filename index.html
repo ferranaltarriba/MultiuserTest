@@ -78,6 +78,7 @@
 		$('#codesubmit').on('click', function() {
 			var c = $('#codeinput').val();
 			socket.emit("join", c);
+			socket.emit("message", "friendhere");
 			alert("You are now in room "+c);
 		});
 		
@@ -89,11 +90,11 @@
            socket.emit("join", c);
           socket.emit("joinedroom", "joinedroom");
       });*/
-/*
-      socket.on("joinedroom", function (message) {
-        alert(message);
+
+      socket.on("message", function (msg) {
+        alert(msg);
       });
-		*/
+		
     </script>
   </body>
 </html>
