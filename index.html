@@ -13,6 +13,7 @@
 	<br/>
 	<p id="room_code"></p>
 	  
+	<input type="text" id="name" value="enter your name here">
 	<input type="text" id="codeinput" value="enter your friend's code here">
 	<input type="submit" id="codesubmit" value="submit">
 	  <br/>
@@ -23,6 +24,8 @@
     <!-- Client Code    -->
     <script type="text/javascript">
 
+		var name = "";
+		
 		//Define random room code
 		
 		function makeid(length) {
@@ -77,9 +80,10 @@
 		
 		$('#codesubmit').on('click', function() {
 			var c = $('#codeinput').val();
+			name = $('#name').val();
 			socket.emit("join", c);
-			socket.emit("message", "friendhere");
-			alert("You are now in room "+c);
+			socket.emit("message", name);
+			alert(name+", you are now in room "+c);
 		});
 		
 		/*
@@ -92,7 +96,7 @@
       });*/
 
       socket.on("message", function (msg) {
-        alert(msg);
+        alert(msg+" joined the room");
       });
 		
     </script>
