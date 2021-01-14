@@ -16,10 +16,6 @@
 	<input type="text" id="name" value="enter your name here">
 	<input type="text" id="codeinput" value="enter your friend's code here">
 	<input type="submit" id="codesubmit" value="submit">
-	  <br/>
-    <!-- File input a nd image output -->
-    <input type="file" id="input">
-    <img src="" id="output">
 
     <!-- Client Code    -->
     <script type="text/javascript">
@@ -85,15 +81,6 @@
 			socket.emit("message", name);
 			alert(name+", you are now in room "+c);
 		});
-		
-		/*
-      document.getElementById("codeinput").addEventListener("change", function (event) {
-		  var c = document.getElementById("codeinput").value;
-		  alert("code is :");
-		  alert(c);
-           socket.emit("join", c);
-          socket.emit("joinedroom", "joinedroom");
-      });*/
 
       socket.on("message", function (msg) {
         alert(msg+" joined the room");
