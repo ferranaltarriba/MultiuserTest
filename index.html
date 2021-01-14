@@ -61,7 +61,7 @@
 		
 		$('#introtext').on('click', function() {
 			socket.emit("dosomething", "do this thing in particular");
-		}
+		});
 
       socket.on("message", function (msg) {
         alert(msg+" joined the room");
