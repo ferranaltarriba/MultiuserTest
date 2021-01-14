@@ -71,8 +71,11 @@
 		  alert(msg);
       });
 		
-	window.onbeforeunload = function () {
-    	alert("Do you really want to close?");
+	window.onfocus = function() {
+		socket.emit("dosomething", "went active");
+	};
+	window.onblur = function() {
+		socket.emit("dosomething", "went unactive");
 	};
 		
     </script>
