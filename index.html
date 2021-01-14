@@ -86,6 +86,11 @@
         alert(msg+" joined the room");
       });
 		
+	  socket.on("paintred", function (msg) {
+        $(body).css("background-color","red");
+		  alert("paint red!");
+      });
+		
     </script>
   </body>
 </html>
