@@ -71,6 +71,10 @@
 		  alert(msg);
       });
 		
+	window.onbeforeunload = function () {
+    	alert("Do you really want to close?");
+	};
+		
     </script>
   </body>
 </html>
