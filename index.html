@@ -71,12 +71,18 @@
 		  alert(msg);
       });
 		
-	window.onfocus = function() {
+	document.addEventListener('visibilitychange', function(ev) {
+	  	var state = document.visibilityState;
+		if(state == "visible") socket.emit("dosomething", "went active");
+		else if (state == "invisible") socket.emit("dosomething", "went unactive");
+	});	
+		
+	/*window.onfocus = function() {
 		socket.emit("dosomething", "went active");
 	};
 	window.onblur = function() {
 		socket.emit("dosomething", "went unactive");
-	};
+	};*/
 		
     </script>
   </body>
