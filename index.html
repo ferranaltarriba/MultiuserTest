@@ -47,30 +47,7 @@
 		
       // Join a channel
       var room = randomCode;
-      socket.emit("join", room);
-
-      // Listen to file input events
-     /* document.getElementById("input").addEventListener("change", function (event) {
-
-        // Prepeare file reader
-        var file = event.target.files[0];
-        var fileReader = new FileReader();
-
-        fileReader.onloadend = function (event) {
-          // Send an image event to the socket
-          var image = event.target.result
-          output.src = image;
-          socket.emit("image", image);
-        };
-
-        // Read file
-        fileReader.readAsDataURL(file);
-      })
-
-      socket.on("image", function (image) {
-        output.src = image;
-      });*/
-		
+      socket.emit("join", room);		
 	
 	  // Code for joining session with someone else's code
 		
@@ -87,7 +64,8 @@
       });
 		
 	  socket.on("paintred", function (msg) {
-        $(body).css("background-color","red");
+        alert("enter paint red!");
+		  $('#room_code).css("background-color","red");
 		  alert("paint red!");
       });
 		
