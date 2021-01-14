@@ -63,10 +63,8 @@
         alert(msg+" joined the room");
       });
 		
-	  socket.on("paintred", function (msg) {
-        alert("enter paint red!");
-		  $('#room_code').css("background-color","red");
-		  alert("paint red!");
+	  socket.on("dosomething", function (msg) {
+		  alert(msg);
       });
 		
     </script>
