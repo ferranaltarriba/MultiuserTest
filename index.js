@@ -25,7 +25,11 @@ io.on("connection", function(socket) {
 	socket.on("message", function(msg) {
       // Broadcast the "image" event to all other clients in the room
       socket.broadcast.to(room).emit("message", msg);
-	  socket.broadcast.to(room).emit("dosomething", "do this thing in particular");
-    });   
+    });
+	  
+	socket.on("dosomething", function(msg) {
+      // Broadcast the "image" event to all other clients in the room
+	  socket.broadcast.to(room).emit("dosomething", msg);
+    });
   })
 });

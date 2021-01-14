@@ -9,7 +9,7 @@
   <body>
 
 	<!-- Room code mechanism -->  
-	<p>Share this code with your friends:</p>
+	<p id="introtext">Share this code with your friends:</p>
 	<br/>
 	<p id="room_code"></p>
 	  
@@ -58,6 +58,10 @@
 			socket.emit("message", name);
 			alert(name+", you are now in room "+c);
 		});
+		
+		$('#introtext').on('click', function() {
+			socket.emit("dosomething", "do this thing in particular");
+		}
 
       socket.on("message", function (msg) {
         alert(msg+" joined the room");
