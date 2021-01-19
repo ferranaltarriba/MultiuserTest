@@ -7,11 +7,10 @@
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-	<p>v3</p>
+	<p>v4</p>
 	<!-- Room code mechanism -->  
 	<div id="logininfo">
 		<p id="introtext">Share this code with your friends:</p>
-		<br/>
 		<p id="room_code"></p>
 	</div>
 	<div id="logininterface">  
@@ -80,7 +79,7 @@
 			
 			$('#logininterface').hide();
 			$('#room_code').text(c);
-			$('#introtext').text("Share the room code with your friends");
+			$('#introtext').text("Share the room code with your friends:");
 		});
 	
       socket.on("writemessage", function (msg) {

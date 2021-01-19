@@ -42,9 +42,13 @@ io.on("connection", function(socket) {
 		c = c.concat(clients[i]);
 		c = c.concat("/");
 	  }
+	  //communicate with new player	
 	  socket.emit("updateplayers", c);
 	  socket.emit("writemessage", msg+", you joined the room");
-      socket.broadcast.to(room).emit("updateplayers", c);
+	  socket.emit("writemessage", "We are "+numClients[room]+ " now");
+      
+	  //communicate with existing players	
+	  socket.broadcast.to(room).emit("updateplayers", c);
 	  socket.broadcast.to(room).emit("writemessage", msg+ " joined the room");
 	  socket.broadcast.to(room).emit("writemessage", "We are "+numClients[room]+ " now");
     });
