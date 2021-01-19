@@ -37,12 +37,12 @@ io.on("connection", function(socket) {
 	
 	var c = "";  
 	  
-	for(var i=0; i<numClients; i++){
+	for(var i=0; i<numClients[room]; i++){
 		c = c.concat(clients[i]);
 		c = c.concat("/");
 	}
 	  
-	socket.emit("defineclients", "hellossss"+c);
+	socket.emit("defineclients", c);
 	  
 	socket.on("addplayer", function(msg) {
 	  clients[numClients] = msg;
