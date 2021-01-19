@@ -40,7 +40,7 @@ io.on("connection", function(socket) {
 		clients[numClients[room]] = "-";
 	  }
 		
-	  if(clients[numClients[room]] == "-") clients[numClients[room]]= msg;
+	  if(clients[numClients[room]-1] == "-") clients[numClients[room]-1]= msg;
 	  var c = "";
 	  for(var i=0; i<6; i++){
 		c = c.concat(clients[i]);
