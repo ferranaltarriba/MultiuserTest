@@ -16,8 +16,7 @@ const server = express()
 const io = socketIO(server);
 
 var numClients = {};
-var clients = [];
-clients[0] = "Host";
+var clients = ["Host","-","-","-","-","-"];
 
 // Register "connection" events to the WebSocket
 io.on("connection", function(socket) {
@@ -37,6 +36,9 @@ io.on("connection", function(socket) {
 	socket.emit("defineposition", numClients[room]);   
 	  
 	socket.on("addplayer", function(msg) {
+	  //read and store existing player names here!!!!
+		//or alternatively, only write the new player names, e.g. socket. emit("updateplayer1",msg);
+		
 	  for(var i=numClients[room]; i<6; i++){
 		clients[numClients[room]] = "-";
 	  }
