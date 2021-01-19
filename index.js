@@ -37,9 +37,9 @@ io.on("connection", function(socket) {
 	
 	var c = "";  
 	  
-	for(var i=1; i<numClients; i++){
-		c = c.concat("/");
+	for(var i=0; i<numClients; i++){
 		c = c.concat(clients[i]);
+		c = c.concat("/");
 	}
 	  
 	socket.emit("defineclients", c);
