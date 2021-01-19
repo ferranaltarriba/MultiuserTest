@@ -90,11 +90,11 @@
 		
 	  socket.on("defineposition", function (msg) {
 		  ownPosition = msg-1;
-		  $('#message').append("my own position is "+ownPosition);
+		  $('#message').append("<br/>my own position is "+ownPosition);
 		  nPlayers = ownPosition+1;
       });	
 		
-	  socket.on("addplayer", function (msg) {
+	  socket.on("updateplayers", function (msg) {
 		  players[nPlayers] = msg;
 		  nPlayers++;
 		  
