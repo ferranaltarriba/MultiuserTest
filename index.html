@@ -36,6 +36,8 @@
 		
 		var nPlayers = 1;
 		
+		var ownPosition = 0;
+		
 		var name = "Host";
 		
 		//Define random room code
@@ -80,6 +82,19 @@
       socket.on("writemessage", function (msg) {
 		  $('#message').append("<br/>"+msg);
       });
+		
+	  socket.on("defineposition", function (msg) {
+		  ownPosition = msg-1;
+		  nPlayers = ownPosition+1;
+		  players[ownPosition] = "You";
+		  if(ownPosition!=0) players[0] = "Host";
+		  $('#p1').text(players[0]);
+		  $('#p2').text(players[1]);
+		  $('#p3').text(players[2]);
+		  $('#p4').text(players[3]);
+		  $('#p5').text(players[4]);
+		  $('#p6').text(players[5]);
+      });	
 		
 	  socket.on("addplayer", function (msg) {
 		  players[nPlayers] = msg;
