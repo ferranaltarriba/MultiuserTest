@@ -36,7 +36,7 @@ io.on("connection", function(socket) {
 	socket.emit("defineposition", numClients[room]);   
 	  
 	socket.on("addplayer", function(msg) {
-	  clients[numClients] = msg;
+	  clients[numClients[room] = msg;
 	  var c = "";
 	  for(var i=0; i<6; i++){
 		c = c.concat(clients[i]);
@@ -45,7 +45,7 @@ io.on("connection", function(socket) {
 	  socket.emit("updateplayers", c);
       socket.broadcast.to(room).emit("updateplayers", c);
 	  socket.broadcast.to(room).emit("writemessage", msg+ " joined the room");
-	  socket.broadcast.to(room).emit("writemessage", "We are "+numClients[room]+ "now");
+	  socket.broadcast.to(room).emit("writemessage", "We are "+numClients[room]+ " now");
     });
 	  
 	socket.on("writemessage", function(msg) {
