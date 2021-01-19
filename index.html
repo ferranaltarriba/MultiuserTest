@@ -104,13 +104,15 @@
 			players[i] = c[i];
 		  } 
 		  
+		  players[ownPosition] = "Me";
+		  
 		  $('#p1').text(players[0]);
 		  $('#p2').text(players[1]);
 		  $('#p3').text(players[2]);
 		  $('#p4').text(players[3]);
 		  $('#p5').text(players[4]);
 		  $('#p6').text(players[5]);
-		  
+		  		  
 		  $('#logininterface').hide();
 			$('#introtext').text("Share the room code with your friends");
       });
