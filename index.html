@@ -76,11 +76,7 @@
 			socket.emit("addplayer", name);
 			$('#message').append("<br/>"+name+", you are now in room "+c);
 		});
-		
-	  socket.on("B", function (msg) {
-		  $('#message').append("<br/>"+msg);
-      });
-		
+	
       socket.on("writemessage", function (msg) {
 		  $('#message').append("<br/>"+msg);
       });

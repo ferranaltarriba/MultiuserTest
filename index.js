@@ -31,7 +31,7 @@ io.on("connection", function(socket) {
         numClients[room]++;
     } 
 	
-	socket.broadcast.to(room).emit("writemessage", "we are "+numClients[room]);  
+	socket.emit("writemessage", "we are "+numClients[room]);  
 	  
 	socket.on("addplayer", function(msg) {
       socket.broadcast.to(room).emit("addplayer", msg);
