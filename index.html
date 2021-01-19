@@ -32,7 +32,7 @@
     <!-- Client Code    -->
     <script type="text/javascript">
 
-		var players = ["You","-","-","-","-","-"];
+		var players = ["Me","-","-","-","-","-"];
 		
 		var nPlayers = 1;
 		
@@ -87,15 +87,30 @@
 		  ownPosition = msg-1;
 		  $('#message').append("my own position is "+ownPosition);
 		  nPlayers = ownPosition+1;
-		  players[ownPosition] = "You";
-		  if(ownPosition!=0) players[0] = "Host";
+		 
+		  /*if(ownPosition!=0) players[0] = "Host";
 		  $('#p1').text(players[0]);
 		  $('#p2').text(players[1]);
 		  $('#p3').text(players[2]);
 		  $('#p4').text(players[3]);
 		  $('#p5').text(players[4]);
-		  $('#p6').text(players[5]);
+		  $('#p6').text(players[5]);*/
       });	
+		
+	  socket.on("defineclients", function (msg) {
+	  	var c = msg.split("/");
+		  
+		for(var i=0; i<c.length; i++){
+			players[i] = c[i];
+		} 
+		  
+		$('#p1').text(players[0]);
+		  $('#p2').text(players[1]);
+		  $('#p3').text(players[2]);
+		  $('#p4').text(players[3]);
+		  $('#p5').text(players[4]);
+		  $('#p6').text(players[5]);  
+	  }
 		
 	  socket.on("addplayer", function (msg) {
 		  players[nPlayers] = msg;

@@ -16,6 +16,7 @@ const server = express()
 const io = socketIO(server);
 
 var numClients = {};
+var clients = {};
 
 // Register "connection" events to the WebSocket
 io.on("connection", function(socket) {
@@ -25,15 +26,27 @@ io.on("connection", function(socket) {
     socket.join(room)
 	  
 	socket.room = room;
-    if (numClients[room] == undefined) {
+    
+	clients[numClients] = "Host";  
+	if (numClients[room] == undefined) {
         numClients[room] = 1;
     } else {
         numClients[room]++;
     } 
 	
-	socket.emit("defineposition", numClients[room]);  
+	socket.emit("defineposition", numClients[room]);
+	
+	var c = "";  
+	  
+	for(var i=0; i<numClients; i++){
+		c = c.concat("/");
+		c = c.concat(clients[i]);
+	}
+	  
+	socket.emit("defineclients", c);
 	  
 	socket.on("addplayer", function(msg) {
+	  clients[numClients] = msg;
       socket.broadcast.to(room).emit("addplayer", msg);
 	  socket.broadcast.to(room).emit("writemessage", msg+ " joined the room");
     });
