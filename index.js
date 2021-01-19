@@ -42,7 +42,7 @@ io.on("connection", function(socket) {
 		c = c.concat("/");
 	}
 	  
-	socket.emit("defineclients", c);
+	socket.emit("defineclients", "hellossss"+c);
 	  
 	socket.on("addplayer", function(msg) {
 	  clients[numClients] = msg;
