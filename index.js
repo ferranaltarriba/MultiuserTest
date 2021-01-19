@@ -39,6 +39,7 @@ io.on("connection", function(socket) {
 	  //read and store existing player names here!!!!
 		//I think we'll have to ask them to send their names and then update the names individually...
 		//or alternatively, only write the new player names, e.g. socket. emit("updateplayer1",msg);
+		//or maybe even better, make our lives simpler and just store amount of players and not their names
 		
 	  for(var i=numClients[room]; i<6; i++){
 		clients[numClients[room]] = "-";
