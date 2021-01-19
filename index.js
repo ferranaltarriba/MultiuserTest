@@ -48,7 +48,6 @@ io.on("connection", function(socket) {
 	  
 	socket.on("goactive", function(msg) {
 	  //socket.broadcast.to(room).emit("writemessage", msg+" went active");
-		activeClients[room]++;
 		socket.emit("updateactiveplayers", "1");
 		socket.broadcast.to(room).emit("updateactiveplayers", "1");
     });
