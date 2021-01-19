@@ -61,7 +61,7 @@
 			name = $('#name').val();
 			socket.emit("join", c);
 			socket.emit("message", name);
-			alert(name+", you are now in room "+c);
+			$('#message').text(name+", you are now in room "+c);
 		});
 		
 		$('#introtext').on('click', function() {
