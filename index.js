@@ -16,7 +16,7 @@ const server = express()
 const io = socketIO(server);
 
 var numClients = {};
-var clients = {};
+var clients = ["Host","-","-","-","-","-"];
 
 // Register "connection" events to the WebSocket
 io.on("connection", function(socket) {
@@ -25,9 +25,8 @@ io.on("connection", function(socket) {
     // join channel provided by client
     socket.join(room)
 	  
-	socket.room = room;
-    
-	clients[numClients] = "Host";  
+	socket.room = room; 
+	  
 	if (numClients[room] == undefined) {
         numClients[room] = 1;
     } else {
