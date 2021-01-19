@@ -20,16 +20,19 @@ io.on("connection", function(socket) {
   // Register "join" events, requested by a connected client
   socket.on("join", function (room) {
     // join channel provided by client
-    socket.join(room)
-  
+    socket.join(room)  
+	  
 	socket.on("message", function(msg) {
-      // Broadcast the "image" event to all other clients in the room
       socket.broadcast.to(room).emit("message", msg);
     });
 	  
-	socket.on("dosomething", function(msg) {
-      // Broadcast the "image" event to all other clients in the room
-	  socket.broadcast.to(room).emit("dosomething", msg);
+	socket.on("gounactive", function(msg) {
+	  socket.broadcast.to(room).emit("writemessage", msg+" went unactive");
     });
+	  
+	socket.on("goactive", function(msg) {
+	  socket.broadcast.to(room).emit("writemessage", msg+" went active");
+    });
+	  
   })
 });

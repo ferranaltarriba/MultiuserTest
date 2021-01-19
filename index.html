@@ -63,24 +63,20 @@
 			socket.emit("message", name);
 			$('#message').text(name+", you are now in room "+c);
 		});
-		
-		$('#introtext').on('click', function() {
-			socket.emit("dosomething", "do this thing in particular");
-		});
 
       socket.on("message", function (msg) {
           $('#message').text(msg+" joined the room");
       });
 		
-	  socket.on("dosomething", function (msg) {
+	  socket.on("writemessage", function (msg) {
 		  $('#message').text(msg);
       });
 		
 	$(window).blur(function(){
-		socket.emit("dosomething", name+" went unactive");
+		socket.emit("gounactive", name);
 	});
 	$(window).focus(function(){
-		socket.emit("dosomething", name+" went active");
+		socket.emit("goactive", name);
 	});	
 		
     </script>
