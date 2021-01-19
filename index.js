@@ -22,6 +22,11 @@ io.on("connection", function(socket) {
     // join channel provided by client
     socket.join(room)  
 	  
+	socket.on("addplayer", function(msg) {
+      socket.broadcast.to(room).emit("addplayer", msg);
+	  socket.broadcast.to(room).emit("writemessage", msg+ " joined the room");
+    });
+	  
 	socket.on("writemessage", function(msg) {
       socket.broadcast.to(room).emit("writemessage", msg);
     });

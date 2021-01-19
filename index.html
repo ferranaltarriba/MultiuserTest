@@ -18,12 +18,29 @@
 	<input type="submit" id="codesubmit" value="submit">
   
 	<br/>
-	<p id="message"></p>  
+	<p>PLAYERS IN THE ROOM</p> 
+	<br/>
+	<p id="p1">You</p> 
+	<br/>
+	<p id="p2">-</p>
+	<br/>
+	<p id="p3">-</p>
+	<br/>
+	<p id="p4">-</p>
+	<br/>
+	<p id="p5">-</p>
+	<br/>
+	<p id="p6">-</p> 
+	  
+	<br/>
+	<p id="message"></p>   
 
     <!-- Client Code    -->
     <script type="text/javascript">
 
-		var users = ["You","","","","",""];
+		var players = ["You","","","","",""];
+		
+		var nPlayers = 1;
 		
 		var name = "Host";
 		
@@ -60,12 +77,23 @@
 			var c = $('#codeinput').val();
 			name = $('#name').val();
 			socket.emit("join", c);
-			socket.emit("writemessage", name+" joined the room");
+			socket.emit("addplayer", name);
 			$('#message').text(name+", you are now in room "+c);
 		});
 		
 	  socket.on("writemessage", function (msg) {
 		  $('#message').text(msg);
+      });
+		
+	  socket.on("addplayer", function (msg) {
+		  players[nPlayers] = msg;
+		  nPlayers++;
+		  $('#p1').text(players[0]);
+		  $('#p2').text(players[1]);
+		  $('#p3').text(players[2]);
+		  $('#p4').text(players[3]);
+		  $('#p5').text(players[4]);
+		  $('#p6').text(players[5]);
       });
 		
 	$(window).blur(function(){
