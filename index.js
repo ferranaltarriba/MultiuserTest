@@ -38,7 +38,7 @@ io.on("connection", function(socket) {
 	socket.on("addplayer", function(msg) {
 	  clients[numClients] = msg;
 	  var c = "";
-	  for(var i=0; i<numClients[room]; i++){
+	  for(var i=0; i<6; i++){
 		c = c.concat(clients[i]);
 		c = c.concat("/");
 	  }
