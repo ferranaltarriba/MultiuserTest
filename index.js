@@ -43,6 +43,7 @@ io.on("connection", function(socket) {
 		c = c.concat("/");
 	  }
       socket.broadcast.to(room).emit("addplayer", c);
+	  socket.emit("addplayer", c);
 	  socket.broadcast.to(room).emit("writemessage", msg+ " joined the room");
 	  socket.broadcast.to(room).emit("writemessage", "We are "+numClients[room]+ "now");
     });
