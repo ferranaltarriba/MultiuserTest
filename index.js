@@ -16,7 +16,8 @@ const server = express()
 const io = socketIO(server);
 
 var numClients = {};
-var clients = ["Host","-","-","-","-","-"];
+var clients = [];
+clients[0] = "Host";
 
 // Register "connection" events to the WebSocket
 io.on("connection", function(socket) {
