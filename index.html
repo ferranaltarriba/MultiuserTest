@@ -7,22 +7,20 @@
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-	<p>v13</p>
+	<p>v15</p>
 	<!-- Room code mechanism -->  
 	<div id="logininfo">
 		<p id="introtext">Share this code with your friends:</p>
 		<p id="room_code"></p>
 	</div>
 	<div id="logininterface">  
-		<input type="text" id="name" value="enter your name here">
 		<input type="text" id="codeinput" value="enter your friend's code here">
 		<input type="submit" id="codesubmit" value="submit">
 	</div>
 	  
 	<br/>
-	<p>PLAYERS IN THE ROOM</p> 
-	<p id="playersInTheRoom">1</p>
-	  
+	  <p>PLAYERS IN THE ROOM: <span id="playersInTheRoom">1</span></p>
+	  <p>ACTIVE PLAYERS IN THE ROOM: <span id="activePlayers">1</span></p>
 	<br/>
 	<p>MESSAGES: <span id="message"></span></p>   
 
@@ -30,6 +28,7 @@
     <script type="text/javascript">
 		
 		var nPlayers = 1;
+		var activePlayers = 1;
 		
 		//Define random room code
 		
@@ -60,7 +59,6 @@
 		
 		$('#codesubmit').on('click', function() {
 			var c = $('#codeinput').val();
-			name = $('#name').val();
 			
 			socket.emit("join", c);
 			
@@ -76,10 +74,17 @@
       });
 		
 	  socket.on("updateplayers", function (msg) {
-		  ownPosition = msg-1;
 		  nPlayers = msg;
 		  $('#playersInTheRoom').text(nPlayers);
-      });	
+		  $('#logininterface').hide();
+		  $('#room_code').text(c);
+		  $('#introtext').text("Share the room code with your friends:");
+      });
+		
+	  socket.on("updateactiveplayers", function (msg) {
+		  activePlayers = msg;
+		  $('#activePlayers').text(activePlayers);
+      });
 		
 	$(window).blur(function(){
 		socket.emit("gounactive", name);

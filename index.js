@@ -16,7 +16,7 @@ const server = express()
 const io = socketIO(server);
 
 var numClients = {};
-var clients = ["Host","-","-","-","-","-"];
+var activeClients = {};
 
 // Register "connection" events to the WebSocket
 io.on("connection", function(socket) {
@@ -29,8 +29,10 @@ io.on("connection", function(socket) {
 	  
 	if (numClients[room] == undefined) {
         numClients[room] = 1;
+		activeClients[room] = 1;
     } else {
         numClients[room]++;
+		activeClients[room]++;
     } 
 	
 	socket.emit("updateplayers", numClients[room]);
@@ -42,10 +44,16 @@ io.on("connection", function(socket) {
 	  
 	socket.on("gounactive", function(msg) {
 	  //socket.broadcast.to(room).emit("writemessage", msg+" went unactive");
+		activeClients[room]--;
+		socket.emit("updateactiveplayers", activeClients[room]);
+		socket.broadcast.to(room).emit("updateactiveplayers", activeClients[room]);
     });
 	  
 	socket.on("goactive", function(msg) {
 	  //socket.broadcast.to(room).emit("writemessage", msg+" went active");
+		activeClients[room]++;
+		socket.emit("updateactiveplayers", activeClients[room]);
+		socket.broadcast.to(room).emit("updateactiveplayers", activeClients[room]);
     });
 	  
   })
