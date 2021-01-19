@@ -37,6 +37,7 @@ io.on("connection", function(socket) {
 	
 	socket.emit("updateplayers", numClients[room]);
 	socket.broadcast.to(room).emit("updateplayers", numClients[room]);
+	socket.broadcast.to(room).emit("hidelogin", "");
 	  
 	socket.on("writemessage", function(msg) {
       socket.broadcast.to(room).emit("writemessage", msg);
