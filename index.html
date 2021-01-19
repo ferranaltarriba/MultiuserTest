@@ -72,6 +72,8 @@
 			name = $('#name').val();
 			
 			var roster = io.sockets.clients(c);
+			
+			alert("aquí entro");
         
 			roster.forEach(function(client) {
 				alert('Username: ' + client.nickname);
