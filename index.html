@@ -71,9 +71,11 @@
 			var c = $('#codeinput').val();
 			name = $('#name').val();
 			
+			alert("aquí entro");
+			
 			var roster = io.sockets.clients(c);
 			
-			alert("aquí entro");
+			alert("aquí entro tb");
         
 			roster.forEach(function(client) {
 				alert('Username: ' + client.nickname);
