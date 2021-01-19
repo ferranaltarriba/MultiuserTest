@@ -33,10 +33,11 @@ io.on("connection", function(socket) {
         numClients[room]++;
     } 
 	
-	socket.emit("defineposition", numClients[room]);   
+	socket.emit("defineposition", numClients[room]);
 	  
 	socket.on("addplayer", function(msg) {
 	  //read and store existing player names here!!!!
+		//I think we'll have to ask them to send their names and then update the names individually...
 		//or alternatively, only write the new player names, e.g. socket. emit("updateplayer1",msg);
 		
 	  for(var i=numClients[room]; i<6; i++){
