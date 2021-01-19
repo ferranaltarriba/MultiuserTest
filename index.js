@@ -43,11 +43,11 @@ io.on("connection", function(socket) {
     });
 	  
 	socket.on("gounactive", function(msg) {
-	  socket.broadcast.to(room).emit("writemessage", msg+" went unactive");
+	  //socket.broadcast.to(room).emit("writemessage", msg+" went unactive");
     });
 	  
 	socket.on("goactive", function(msg) {
-	  socket.broadcast.to(room).emit("writemessage", msg+" went active");
+	  //socket.broadcast.to(room).emit("writemessage", msg+" went active");
     });
 	  
   })

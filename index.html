@@ -85,6 +85,7 @@
 		
 	  socket.on("defineposition", function (msg) {
 		  ownPosition = msg-1;
+		  $('#message').append("my own position is "+ownPosition);
 		  nPlayers = ownPosition+1;
 		  players[ownPosition] = "You";
 		  if(ownPosition!=0) players[0] = "Host";
