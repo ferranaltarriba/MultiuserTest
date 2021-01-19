@@ -74,11 +74,11 @@
 			socket.emit("join", c);
 			
 			socket.emit("addplayer", name);
-			$('#message').append(name+", you are now in room "+c);
+			$('#message').append("<br/>"+name+", you are now in room "+c);
 		});
 		
 	  socket.on("writemessage", function (msg) {
-		  $('#message').append(msg);
+		  $('#message').append("<br/>"+msg);
       });
 		
 	  socket.on("addplayer", function (msg) {
