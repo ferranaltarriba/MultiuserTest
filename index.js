@@ -36,6 +36,10 @@ io.on("connection", function(socket) {
 	socket.emit("defineposition", numClients[room]);   
 	  
 	socket.on("addplayer", function(msg) {
+	  for(var i=numClients[room]; i<6; i++){
+		clients[numClients[room]] = "-";
+	  }
+		
 	  if(clients[numClients[room]] == "-") clients[numClients[room]]= msg;
 	  var c = "";
 	  for(var i=0; i<6; i++){
