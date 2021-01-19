@@ -7,7 +7,7 @@
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-	<p>v16</p>
+	<p>v17</p>
 	<!-- Room code mechanism -->  
 	<div id="logininfo">
 		<p id="introtext">Share this code with your friends:</p>
@@ -75,11 +75,12 @@
 		
 	  socket.on("updateplayers", function (msg) {
 		  nPlayers = msg;
+		  activePlayers = msg;
 		  $('#playersInTheRoom').text(nPlayers);
       });
 		
 	  socket.on("updateactiveplayers", function (msg) {
-		  activePlayers = msg;
+		  activePlayers = activePlayers + parseInt(msg);
 		  $('#activePlayers').text(activePlayers);
       });
 		
