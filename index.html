@@ -76,15 +76,18 @@
 	  socket.on("updateplayers", function (msg) {
 		  nPlayers = msg;
 		  $('#playersInTheRoom').text(nPlayers);
-		  $('#logininterface').hide();
-		  $('#room_code').text(c);
-		  $('#introtext').text("Share the room code with your friends:");
       });
 		
 	  socket.on("updateactiveplayers", function (msg) {
 		  activePlayers = msg;
 		  $('#activePlayers').text(activePlayers);
       });
+		
+	  socket.on("hidelogin", function (msg) {
+		  $('#logininterface').hide();
+		  $('#room_code').text(c);
+		  $('#introtext').text("Share the room code with your friends:");
+      });	
 		
 	$(window).blur(function(){
 		socket.emit("gounactive", name);
