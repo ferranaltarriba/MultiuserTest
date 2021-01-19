@@ -7,7 +7,7 @@
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-	<p>v1</p>
+	<p>v2</p>
 	<!-- Room code mechanism -->  
 	<div id="logininfo">
 		<p id="introtext">Share this code with your friends:</p>
@@ -77,7 +77,6 @@
 			socket.emit("join", c);
 			
 			socket.emit("addplayer", name);
-			$('#message').append("<br/>"+name+", you are now in room "+c);
 			
 			$('#logininterface').hide();
 			$('#room_code').text(c);
