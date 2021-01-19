@@ -33,22 +33,18 @@ io.on("connection", function(socket) {
         numClients[room]++;
     } 
 	
-	socket.emit("defineposition", numClients[room]);
-	
-	var c = "";   
-	  
-	for(var i=0; i<numClients[room]; i++){
-		c = c.concat(clients[i]);
-		c = c.concat("/");
-	}
-	  
-	socket.emit("defineclients", c);
+	socket.emit("defineposition", numClients[room]);   
 	  
 	socket.on("addplayer", function(msg) {
 	  clients[numClients] = msg;
-      socket.broadcast.to(room).emit("addplayer", msg);
-		socket.emit("writemessage", "I hear you");
+	  var c = "";
+	  for(var i=0; i<numClients[room]; i++){
+		c = c.concat(clients[i]);
+		c = c.concat("/");
+	  }
+      socket.broadcast.to(room).emit("addplayer", c);
 	  socket.broadcast.to(room).emit("writemessage", msg+ " joined the room");
+	  socket.broadcast.to(room).emit("writemessage", "We are "+numClients[room]+ "now");
     });
 	  
 	socket.on("writemessage", function(msg) {
