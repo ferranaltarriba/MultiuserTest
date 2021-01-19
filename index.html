@@ -73,6 +73,8 @@
 			
 			alert("aquí entro");
 			
+			socket.emit("join", c);
+			
 			var roster = io.sockets.clients(c);
 			
 			alert("aquí entro tb");
@@ -81,8 +83,6 @@
 				alert('Username: ' + client.nickname);
 			});
 			
-			
-			socket.emit("join", c);
 			socket.emit("addplayer", name);
 			$('#message').text(name+", you are now in room "+c);
 		});
