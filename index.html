@@ -71,7 +71,7 @@
 			var c = $('#codeinput').val();
 			name = $('#name').val();
 			
-			var roster = io.sockets.clients('chatroom1');
+			var roster = io.sockets.clients(c);
         
 			roster.forEach(function(client) {
 				alert('Username: ' + client.nickname);
