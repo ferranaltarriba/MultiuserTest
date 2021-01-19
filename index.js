@@ -24,14 +24,14 @@ io.on("connection", function(socket) {
     // join channel provided by client
     socket.join(room)
 	  
-	socket.emit('B', "I hear you");
-	  
 	socket.room = room;
     if (numClients[room] == undefined) {
         numClients[room] = 1;
     } else {
         numClients[room]++;
     } 
+	
+	socket.broadcast.to(room).emit("writemessage", "we are "+numClients[room]);  
 	  
 	socket.on("addplayer", function(msg) {
       socket.broadcast.to(room).emit("addplayer", msg);
