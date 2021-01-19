@@ -98,8 +98,9 @@
       });	
 		
 	  socket.on("defineclients", function (msg) {
-	  	var c = msg.split("/");
+	  	
 		$('#message').append(msg);
+		  var c = msg.split("/");
 		for(var i=0; i<c.length; i++){
 			players[i] = c[i];
 		} 
