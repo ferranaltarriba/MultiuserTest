@@ -7,7 +7,7 @@
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-	<p>v2</p>
+	<p>v3</p>
 	<!-- Room code mechanism -->  
 	<div id="logininfo">
 		<p id="introtext">Share this code with your friends:</p>
@@ -89,7 +89,7 @@
 		
 	  socket.on("defineposition", function (msg) {
 		  ownPosition = msg-1;
-		  $('#message').append("<br/>my own position is "+ownPosition);
+		  //$('#message').append("<br/>my position is "+ownPosition);
 		  nPlayers = ownPosition+1;
       });	
 		
@@ -113,7 +113,7 @@
 		  $('#p6').text(players[5]);
 		  		  
 		  $('#logininterface').hide();
-			$('#introtext').text("Share the room code with your friends");
+		  $('#introtext').text("Share the room code with your friends");
       });
 		
 	$(window).blur(function(){
