@@ -22,7 +22,7 @@
 	  
 	<br/>
 	<p>PLAYERS IN THE ROOM</p> 
-	<p id="p1">You</p> 
+	<p id="p1">Me</p> 
 	<p id="p2">-</p>
 	<p id="p3">-</p>
 	<p id="p4">-</p>
@@ -59,8 +59,6 @@
 			
       // Get WebSocket
       var socket = io();
-
-		
 		
       // Get DOM elements
       var input = document.getElementById("input");
@@ -83,6 +81,7 @@
 			
 			$('#logininterface').hide();
 			$('#room_code').text(c);
+			$('#introtext').text("Share the room code with your friends");
 		});
 	
       socket.on("writemessage", function (msg) {
@@ -129,7 +128,8 @@
 		  $('#p5').text(players[4]);
 		  $('#p6').text(players[5]);
 		  
-		  
+		  $('#logininterface').hide();
+			$('#introtext').text("Share the room code with your friends");
       });
 		
 	$(window).blur(function(){
