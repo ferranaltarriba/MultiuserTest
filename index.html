@@ -99,7 +99,7 @@
 		
 	  socket.on("defineclients", function (msg) {
 	  	var c = msg.split("/");
-		  
+		$('#message').append(msg);
 		for(var i=0; i<c.length; i++){
 			players[i] = c[i];
 		} 
