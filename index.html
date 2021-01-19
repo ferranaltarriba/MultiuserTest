@@ -16,11 +16,16 @@
 	<input type="text" id="name" value="enter your name here">
 	<input type="text" id="codeinput" value="enter your friend's code here">
 	<input type="submit" id="codesubmit" value="submit">
+  
+	<br/>
+	<p id="message"></p>  
 
     <!-- Client Code    -->
     <script type="text/javascript">
 
-		var name = "";
+		var users = ["You","","","","",""];
+		
+		var name = "Host";
 		
 		//Define random room code
 		
@@ -64,20 +69,18 @@
 		});
 
       socket.on("message", function (msg) {
-        alert(msg+" joined the room");
+          $('#message').text(msg+" joined the room");
       });
 		
 	  socket.on("dosomething", function (msg) {
-		  alert(msg);
+		  $('#message').text(msg);
       });
 		
 	$(window).blur(function(){
-		socket.emit("dosomething", "went unactive");
-		$('head title', window.parent.document).text('Inactive');
+		socket.emit("dosomething", name+" went unactive");
 	});
 	$(window).focus(function(){
-		socket.emit("dosomething", "went active");
-		$('head title', window.parent.document).text('Active');
+		socket.emit("dosomething", name+" went active");
 	});	
 		
     </script>
