@@ -75,12 +75,16 @@
 			
 			socket.emit("join", c);
 			
+			alert("aquí entro tb");
+			
 			var clients = io.sockets.adapter.rooms[c].sockets;   
+			
+			alert("aquí entro tbtb");
 
 			//to get the number of clients
 			var numClients = (typeof clients !== 'undefined') ? Object.keys(clients).length : 0;
 
-			alert("aquí entro tb");
+			alert("aquí entro tbtbtb");
 			alert(numClients);
 			
 			socket.emit("addplayer", name);
