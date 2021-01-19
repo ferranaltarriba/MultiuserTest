@@ -15,12 +15,16 @@ const server = express()
 // Initiatlize SocketIO
 const io = socketIO(server);
 
+var numUsers = 0;
+
 // Register "connection" events to the WebSocket
 io.on("connection", function(socket) {
   // Register "join" events, requested by a connected client
   socket.on("join", function (room) {
     // join channel provided by client
-    socket.join(room)  
+    socket.join(room)
+	  
+	numUsers++;
 	  
 	socket.on("addplayer", function(msg) {
       socket.broadcast.to(room).emit("addplayer", msg);
