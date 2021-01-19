@@ -36,7 +36,7 @@ io.on("connection", function(socket) {
 	socket.emit("defineposition", numClients[room]);   
 	  
 	socket.on("addplayer", function(msg) {
-	  clients[numClients[room]] = msg;
+	  if(clients[numClients[room]] == "-") clients[numClients[room]]= msg;
 	  var c = "";
 	  for(var i=0; i<6; i++){
 		c = c.concat(clients[i]);
