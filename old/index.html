@@ -7,7 +7,7 @@
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-	<p>v13</p>
+	<p>v12</p>
 	<!-- Room code mechanism -->  
 	<div id="logininfo">
 		<p id="introtext">Share this code with your friends:</p>
@@ -21,15 +21,26 @@
 	  
 	<br/>
 	<p>PLAYERS IN THE ROOM</p> 
-	<p id="playersInTheRoom">1</p>
+	<p id="p1">Me</p> 
+	<p id="p2">-</p>
+	<p id="p3">-</p>
+	<p id="p4">-</p>
+	<p id="p5">-</p>
+	<p id="p6">-</p> 
 	  
 	<br/>
-	<p>MESSAGES: <span id="message"></span></p>   
+	<p>MESSAGE: <span id="message"></span></p>   
 
     <!-- Client Code    -->
     <script type="text/javascript">
+
+		var players = ["Me","-","-","-","-","-"];
 		
 		var nPlayers = 1;
+		
+		var ownPosition = 0;
+		
+		var name = "Host";
 		
 		//Define random room code
 		
@@ -64,6 +75,8 @@
 			
 			socket.emit("join", c);
 			
+			setTimeout(function() {socket.emit("addplayer", name);}, 1000);
+			
 			//socket.emit("addplayer", name);
 			
 			$('#logininterface').hide();
@@ -75,11 +88,34 @@
 		  $('#message').append("<br/>"+msg);
       });
 		
-	  socket.on("updateplayers", function (msg) {
+	  socket.on("defineposition", function (msg) {
 		  ownPosition = msg-1;
-		  nPlayers = msg;
-		  $('#playersInTheRoom').text(nPlayers);
+		  //$('#message').append("<br/>my position is "+ownPosition);
+		  nPlayers = ownPosition+1;
       });	
+		
+	  socket.on("updateplayers", function (msg) {
+		  players[nPlayers] = msg;
+		  nPlayers++;
+		  
+		  $('#message').append("<br/>"+msg);
+		  var c = msg.split("/");
+		  for(var i=0; i<c.length; i++){
+			players[i] = c[i];
+		  } 
+		  
+		  players[ownPosition] = "Me";
+		  
+		  $('#p1').text(players[0]);
+		  $('#p2').text(players[1]);
+		  $('#p3').text(players[2]);
+		  $('#p4').text(players[3]);
+		  $('#p5').text(players[4]);
+		  $('#p6').text(players[5]);
+		  		  
+		  $('#logininterface').hide();
+		  $('#introtext').text("Share the room code with your friends");
+      });
 		
 	$(window).blur(function(){
 		socket.emit("gounactive", name);

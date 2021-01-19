@@ -33,8 +33,34 @@ io.on("connection", function(socket) {
         numClients[room]++;
     } 
 	
-	socket.emit("updateplayers", numClients[room]);
-	socket.broadcast.to(room).emit("updateplayers", numClients[room]);
+	socket.emit("defineposition", numClients[room]);
+	  
+	socket.on("addplayer", function(msg) {
+	  //read and store existing player names here!!!!
+		//I think we'll have to ask them to send their names and then update the names individually...
+		//or alternatively, only write the new player names, e.g. socket. emit("updateplayer1",msg);
+		//or maybe even better, make our lives simpler and just store amount of players and not their names
+		
+	  for(var i=numClients[room]; i<6; i++){
+		clients[numClients[room]] = "-";
+	  }
+		
+	  if(clients[numClients[room]-1] == "-") clients[numClients[room]-1]= msg;
+	  var c = "";
+	  for(var i=0; i<6; i++){
+		c = c.concat(clients[i]);
+		c = c.concat("/");
+	  }
+	  //communicate with new player	
+	  socket.emit("updateplayers", c);
+	  socket.emit("writemessage", msg+", you joined the room");
+	  socket.emit("writemessage", "We are "+numClients[room]+ " now");
+      
+	  //communicate with existing players	
+	  socket.broadcast.to(room).emit("updateplayers", c);
+	  socket.broadcast.to(room).emit("writemessage", msg+ " joined the room");
+	  socket.broadcast.to(room).emit("writemessage", "We are "+numClients[room]+ " now");
+    });
 	  
 	socket.on("writemessage", function(msg) {
       socket.broadcast.to(room).emit("writemessage", msg);
