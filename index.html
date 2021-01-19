@@ -60,13 +60,9 @@
 			var c = $('#codeinput').val();
 			name = $('#name').val();
 			socket.emit("join", c);
-			socket.emit("message", name);
+			socket.emit("writemessage", name+" joined the room");
 			$('#message').text(name+", you are now in room "+c);
 		});
-
-      socket.on("message", function (msg) {
-          $('#message').text(msg+" joined the room");
-      });
 		
 	  socket.on("writemessage", function (msg) {
 		  $('#message').text(msg);

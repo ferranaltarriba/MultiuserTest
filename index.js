@@ -22,8 +22,8 @@ io.on("connection", function(socket) {
     // join channel provided by client
     socket.join(room)  
 	  
-	socket.on("message", function(msg) {
-      socket.broadcast.to(room).emit("message", msg);
+	socket.on("writemessage", function(msg) {
+      socket.broadcast.to(room).emit("writemessage", msg);
     });
 	  
 	socket.on("gounactive", function(msg) {
