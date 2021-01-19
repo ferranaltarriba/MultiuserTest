@@ -75,13 +75,13 @@
 			
 			socket.emit("join", c);
 			
-			var roster = io.sockets.clients(c);
-			
+			var clients = io.sockets.adapter.rooms[c].sockets;   
+
+			//to get the number of clients
+			var numClients = (typeof clients !== 'undefined') ? Object.keys(clients).length : 0;
+
 			alert("aquí entro tb");
-        
-			roster.forEach(function(client) {
-				alert('Username: ' + client.nickname);
-			});
+			alert(numClients);
 			
 			socket.emit("addplayer", name);
 			$('#message').text(name+", you are now in room "+c);
