@@ -15,7 +15,7 @@ const server = express()
 // Initiatlize SocketIO
 const io = socketIO(server);
 
-var numUsers = 0;
+var numClients = {};
 
 // Register "connection" events to the WebSocket
 io.on("connection", function(socket) {
@@ -24,7 +24,14 @@ io.on("connection", function(socket) {
     // join channel provided by client
     socket.join(room)
 	  
-	numUsers++;
+	socket.emit('B', "I hear you");
+	  
+	socket.room = room;
+    if (numClients[room] == undefined) {
+        numClients[room] = 1;
+    } else {
+        numClients[room]++;
+    } 
 	  
 	socket.on("addplayer", function(msg) {
       socket.broadcast.to(room).emit("addplayer", msg);
