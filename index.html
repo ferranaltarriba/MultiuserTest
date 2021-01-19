@@ -72,10 +72,12 @@
       });
 		
 	$(window).blur(function(){
-		socket.emit("dosomething", "went unactive");	  
+		socket.emit("dosomething", "went unactive");
+		$('head title', window.parent.document).text('Inactive');
 	});
 	$(window).focus(function(){
 		socket.emit("dosomething", "went active");
+		$('head title', window.parent.document).text('Active');
 	});	
 		
     </script>
