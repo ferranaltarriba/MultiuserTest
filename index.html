@@ -70,6 +70,10 @@
 		$('#codesubmit').on('click', function() {
 			var c = $('#codeinput').val();
 			name = $('#name').val();
+			
+			alert(io.sockets.clients(c));
+			
+			
 			socket.emit("join", c);
 			socket.emit("addplayer", name);
 			$('#message').text(name+", you are now in room "+c);
