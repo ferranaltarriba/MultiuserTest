@@ -9,14 +9,17 @@
   <body>
 
 	<!-- Room code mechanism -->  
-	<p id="introtext">Share this code with your friends:</p>
-	<br/>
-	<p id="room_code"></p>
+	<div id="logininterface">
+		<p id="introtext">Share this code with your friends:</p>
+		<br/>
+		<p id="room_code"></p>
+
+		<input type="text" id="name" value="enter your name here">
+		<input type="text" id="codeinput" value="enter your friend's code here">
+		<input type="submit" id="codesubmit" value="submit">
+
+	</div>
 	  
-	<input type="text" id="name" value="enter your name here">
-	<input type="text" id="codeinput" value="enter your friend's code here">
-	<input type="submit" id="codesubmit" value="submit">
-  
 	<br/>
 	<p>PLAYERS IN THE ROOM</p> 
 	<p id="p1">You</p> 
@@ -77,6 +80,8 @@
 			
 			socket.emit("addplayer", name);
 			$('#message').append("<br/>"+name+", you are now in room "+c);
+			
+			$('#logininterface').hide();
 		});
 	
       socket.on("writemessage", function (msg) {
