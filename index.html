@@ -62,8 +62,6 @@
 			
 			socket.emit("join", c);
 			
-			//socket.emit("addplayer", name);
-			
 			$('#logininterface').hide();
 			$('#room_code').text(c);
 			$('#introtext').text("Share the room code with your friends:");
@@ -91,10 +89,10 @@
       });	
 		
 	$(window).blur(function(){
-		socket.emit("gounactive", name);
+		socket.emit("gounactive", "");
 	});
 	$(window).focus(function(){
-		socket.emit("goactive", name);
+		socket.emit("goactive", "");
 	});	
 		
     </script>
