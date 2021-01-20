@@ -8,10 +8,9 @@ const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
 
 // Start server
-const server = express();
-
-  server.use((req, res) => res.sendFile(INDEX));
- server.listen(PORT, () => console.log("Listening on localhost:" + PORT));
+const server = express()
+  .server.use((req, res) => res.sendFile(INDEX))
+ .server.listen(PORT, () => console.log("Listening on localhost:" + PORT));
 
 
 // Initiatlize SocketIO
