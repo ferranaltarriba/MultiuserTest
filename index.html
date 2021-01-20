@@ -7,7 +7,7 @@
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-	<p>v19</p>
+	<p>v1</p>
 	<!-- Room code mechanism -->  
 	<div id="logininfo">
 		<p id="introtext">Share this code with your friends:</p>
@@ -73,12 +73,12 @@
 		
 	  socket.on("updateplayers", function (msg) {
 		  nPlayers = msg;
-		  activePlayers = msg;
+		  if(activePlayers==1) activePlayers = msg;
 		  $('#playersInTheRoom').text(nPlayers);
       });
 		
 	  socket.on("updateactiveplayers", function (msg) {
-		  activePlayers = activePlayers + parseInt(msg);
+		  activePlayers = msg;
 		  $('#activePlayers').text(activePlayers);
       });
 		
@@ -89,10 +89,10 @@
       });	
 		
 	$(window).blur(function(){
-		socket.emit("gounactive", "");
+		socket.emit("gounactive", activePlayers);
 	});
 	$(window).focus(function(){
-		socket.emit("goactive", "");
+		socket.emit("goactive", activePlayers);
 	});	
 		
     </script>

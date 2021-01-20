@@ -42,14 +42,16 @@ io.on("connection", function(socket) {
 	  
 	socket.on("gounactive", function(msg) {
 	  //socket.broadcast.to(room).emit("writemessage", msg+" went unactive");
-		socket.emit("updateactiveplayers", "-1");
-		socket.broadcast.to(room).emit("updateactiveplayers", "-1");
+		var p = msg-1;
+		socket.emit("updateactiveplayers", p);
+		socket.broadcast.to(room).emit("updateactiveplayers", p);
     });
 	  
 	socket.on("goactive", function(msg) {
 	  //socket.broadcast.to(room).emit("writemessage", msg+" went active");
-		socket.emit("updateactiveplayers", "1");
-		socket.broadcast.to(room).emit("updateactiveplayers", "1");
+		var p = msg+1;
+		socket.emit("updateactiveplayers", p);
+		socket.broadcast.to(room).emit("updateactiveplayers", p);
     });
 	  
   })
