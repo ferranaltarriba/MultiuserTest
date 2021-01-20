@@ -63,6 +63,8 @@ function triggerAudioDescription(t) {
 
 $(document).ready(function () {
 
+	alert("the js opens");
+	
 	var playersnumber = 0;
 	var players = [0,0,0,0,0,0]; //0 means not synced; 1 means synced & active; 2 means synced but temporarily individual; 3 means synced but inactive
 	
