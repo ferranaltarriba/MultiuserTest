@@ -6,12 +6,11 @@ const path = require("path");
 // Configuration
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
-const INDEX2 = path.join(__dirname, 'javascript.js');
 
 // Start server
 const server = express()
-  .use((req, res) => res.sendFile(INDEX) )
-.use((req, res) => res.sendFile(INDEX2) )
+  .use((req, res) => res.sendFile(INDEX))
+.use(express.static('public'))
  .listen(PORT, () => console.log("Listening on localhost:" + PORT));
 
 // Initiatlize SocketIO
