@@ -21,7 +21,7 @@ app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));
  .listen(PORT, () => console.log("Listening on localhost:" + PORT));
 */
 
-
+/*
 
 // Initiatlize SocketIO
 const io = socketIO(server);
@@ -66,4 +66,4 @@ io.on("connection", function(socket) {
     });
 	  
   })
-});
+});*/
