@@ -2,12 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>PlaceMap</title>
+    <title>PlaceMap v1.01</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-	<p>v2</p>
 	<!-- Room code mechanism -->  
 	<div id="logininfo">
 		<p id="introtext">Share this code with your friends:</p>
@@ -26,6 +25,12 @@
 
     <!-- Client Code    -->
     <script type="text/javascript">
+		
+		var express = require('express'); 
+		var app = express();
+		app.use(express.static(__dirname + '/public/javascript.js'));
+
+		app.listen(process.env.PORT || 3000);
 		
 		var nPlayers = 1;
 		var activePlayers = 1;
