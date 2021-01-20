@@ -9,4 +9,5 @@
   "dependencies": {
     "express": "^4.16.2",
     "socketio": "^1.0.0"
+  }
 }
