@@ -8,7 +8,5 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2",
-    "socketio": "^1.0.0",
-	"npm": "14.15.4"
-  }
+    "socketio": "^1.0.0"
 }
