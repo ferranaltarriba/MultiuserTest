@@ -1,1 +1,5 @@
-alert("the js opens");
+
+$( document ).ready(function() {
+    alert("the js opens");
+	console.log( "ready!" );
+});
