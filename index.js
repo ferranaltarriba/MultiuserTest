@@ -5,7 +5,7 @@ const path = require("path");
 
 
 		var app = express();
-		app.use(express.static(__dirname + '/javascript.js'));
+		app.use(express.static(__dirname + 'javascript.js'));
 
 		app.listen(process.env.PORT || 3000);
 
