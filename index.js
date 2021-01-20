@@ -6,7 +6,7 @@ const path = require("path");
 // Configuration
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
-const INDEX2 = path.join(__dirname, 'index.html');
+const INDEX2 = path.join(__dirname, 'javascript.js');
 
 // Start server
 const server = express()
