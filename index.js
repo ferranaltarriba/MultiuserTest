@@ -10,7 +10,6 @@ const INDEX = path.join(__dirname, 'index.html');
 // Start server
 const server = express()
   .use((req, res) => res.sendFile(INDEX))
-.use(express.static('public'))
  .listen(PORT, () => console.log("Listening on localhost:" + PORT));
 
 
