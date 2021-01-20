@@ -3,6 +3,13 @@ const express = require("express");
 const socketIO = require("socket.io");
 const path = require("path");
 
+
+var express = require('express'); 
+		var app = express();
+		app.use(express.static(__dirname + '/javascript.js'));
+
+		app.listen(process.env.PORT || 3000);
+
 // Configuration
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
