@@ -1,101 +1,211 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>PlaceMap</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-  </head>
-  <body>
-	<p>v2</p>
-	<!-- Room code mechanism -->  
-	<div id="logininfo">
-		<p id="introtext">Share this code with your friends:</p>
-		<p id="room_code"></p>
-	</div>
-	<div id="logininterface">  
-		<input type="text" id="codeinput" value="enter your friend's code here">
-		<input type="submit" id="codesubmit" value="submit">
-	</div>
-	  
-	<br/>
-	  <p>PLAYERS IN THE ROOM: <span id="playersInTheRoom">1</span></p>
-	  <p>ACTIVE PLAYERS IN THE ROOM: <span id="activePlayers">1</span></p>
-	<br/>
-	<p>MESSAGES: <span id="message"></span></p>   
+<head>
+<meta charset="UTF-8">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name='viewport', 
+     content='width=device-width, initial-scale=1.0, maximum-scale=1.0, 
+     user-scalable=0' >
+<meta http-equiv="ScreenOrientation" content="autorotate:disabled">
+	
+<title>PlaceMap</title>
+	
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="reset.css">
+	<script type="text/javascript" src="jquery.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script type="text/javascript" src="javascript.js"></script>
+	
+	<link rel="shortcut icon" href="img/icon.png" />
+	<link rel="apple-touch-icon" href="img/icon.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="img/icon.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="img/icon.png" />
+	<link rel="apple-touch-icon" sizes="144x144" href="img/icon.png" />
 
-    <!-- Client Code    -->
-    <script type="text/javascript">
-		
-		var nPlayers = 1;
-		var activePlayers = 1;
-		
-		//Define random room code
-		
-		function makeid(length) {
-		   var result           = '';
-		   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-		   var charactersLength = characters.length;
-		   for ( var i = 0; i < length; i++ ) {
-			  result += characters.charAt(Math.floor(Math.random() * charactersLength));
-		   }
-		   return result;
-		}		
-		var randomCode = makeid(5);
-		$('#room_code').text(randomCode);	
+</head>
+
+<body>
+	<div id="globe"></div>
+	<div id="bubble">
+		<div id="bubble_background"></div>
+		<div id="bubble_dot" class="noalert">0</div>
+		<div id="bubble_content">
+			<div id="bubble_content_alert">
+				Someone broke the social pact and started using their phone for a purpose other than the shared experience! It’s up to you what to do about it. Just be mindful that individual phone use may compromise the quality of your shared mealtime.
+			</div>
+			<div id="bubble_content_individual">
+				The four players are currently respecting the social pact. If you need to take a short break to get in touch with someone who’s not here, you can press the button below to enter your...
+			</div>
+		</div>
+	</div>
+	<div id="wrapper">
+		<div id="landing">
+			<img class="logo" src="img/logo.png"/>
 			
-      // Get WebSocket
-      var socket = io();
+			<div class="button" id="landing_start">
+				<p>START</p>
+			</div>
+			<div class="button" id="landing_about">
+				<p>ABOUT</p>
+			</div>
+		</div>
 		
-      // Get DOM elements
-      var input = document.getElementById("input");
-      var output = document.getElementById("output");
-		
-      // Join a channel
-      var room = randomCode;
-      socket.emit("join", room);		
-	
-	  // Code for joining session with someone else's code
-		
-		$('#codesubmit').on('click', function() {
-			var c = $('#codeinput').val();
+		<div id="sync">
+			<p class="sync_intro">SHARE THIS CODE</p>
+			<p class="sync_code">XC2K4</p>
+			<img src="img/sync_or.png" id="sync_or"/>
+			<input type="text" id="input_code" value="enter a code here" onchange="addcode()">
+			<div id="sync_players">
+				<div id="dot1" class="sync_dot active">You</div>
+				<div id="dot2" class="sync_dot first_inactive">...</div>
+				<div id="dot3" class="sync_dot inactive">...</div>
+				<div id="dot4" class="sync_dot inactive">...</div>
+				<div id="dot5" class="sync_dot inactive">...</div>
+				<div id="dot6" class="sync_dot inactive">...</div>
+			</div>
+			<p class="sync_intro">AND PRESS</p>
+			<div class="button" id="sync_ready">
+				<p>WE'RE READY!</p>
+			</div>
 			
-			socket.emit("join", c);
+		</div>
+
+		<div id="about">
+			<img class="logo" src="img/logo.png"/>
+			<p>PlaceMap is an app designed to support playful and social interaction at mealtime. It was designed by a team of researchers at UC Santa Cruz. If you'd like to know more about the project, please reach out to <a href="mailto:faltarri@ucsc.edu">faltarri@ucsc.edu</a>
+			</p>
+			<div class="button" id="about_return">
+				<p>RETURN</p>
+			</div>
+		</div>
+		
+		<div id="tutorial">
+			<div id="tutorial1">
+				<p class="tutorial_intro">BEFORE WE BEGIN, YOU SHOULD KNOW THAT THIS EXPERIENCE COMES WITH A SOCIAL PACT. IF YOU ALREADY KNOW ABOUT IT, PRESS</p>
+				<div class="button" id="tutorial_understood">
+					<p>UNDERSTOOD</p>
+				</div>
+				<p class="tutorial_intro">IF NOT, PLEASE WATCH OUR</p>
+				<div class="button" id="tutorial_tutorial">
+					<p>TUTORIAL</p>
+				</div>
+			</div>
+			<div id="tutorial2">
+				<p class="tutorial_text">Welcome to PlaceMap! Before you play, you should know that this experience requires players to only use their phones within the premises of this app.That means no social media, no calls, no form of individual phone use during the meal. We want you to focus on your food and on each other’s company.</p>
+				<div class="button" id="tutorial_understood2">
+					<p>UNDERSTOOD</p>
+				</div>
+			</div>
+			<div id="tutorial3">
+				<img src="img/tutorial3.png"/>
+				<p class="tutorial_text">When you start playing, you’ll see a small circle on the top-left corner of the screen, with a number in it. That number signals the amount of players connected to the experience.</p>
+				<div class="button" id="tutorial_understood3">
+					<p>UNDERSTOOD</p>
+				</div>
+			</div>
+			<div id="tutorial4">
+				<img src="img/tutorial4.png"/>
+				<p class="tutorial_text">If someone closes the app to make individual use of their phone, all players will get this alert. That way, the group can make sure all players stay true to the social pact.</p>
+				<div class="button" id="tutorial_understood4">
+					<p>UNDERSTOOD</p>
+				</div>
+			</div>
+			<div id="tutorial5">
+				<img src="img/tutorial3.png"/>
+				<p class="tutorial_text">If you really need to use your phone for an individual purpose, there is a mechanism for you to do it without breaking the social pact. Just click on the top-left circle and a pop-up screen will appear.</p>
+				<div class="button" id="tutorial_understood5">
+					<p>UNDERSTOOD</p>
+				</div>
+			</div>
+			<div id="tutorial6">
+				<img src="img/tutorial6.png"/>
+				<p class="tutorial_text">Then, press the button on the pop-up, and your individual bubble will be created. You’ll then be free to get out of the app without triggering an alert on other players’ phones. But note that they will still know you took some time off as you will be deducted from the number on the top-left circle.</p>
+				<div class="button" id="tutorial_understood6">
+					<p>UNDERSTOOD</p>
+				</div>
+			</div>
+			<div id="tutorial7">
+				<p class="tutorial_intro">YOU’RE ALL SET! ARE YOU READY TO EXPLORE THE FIRST TRADITION?</p>
+				<div class="button" id="tutorial_letsgo">
+					<p>LET'S GO!</p>
+				</div>
+			</div>
+		</div>
+		
+		<div id="tradition">
+			<div id="tradition_sound" class="soundon">
+				<img src="img/sound_on.png" id="soundon"/>
+				<img src="img/sound_off.png" id="soundoff"/>
+			</div>
+			<div id="tradition_minimal">
+				<div class="tradition_text">
+					<p class="tradition_title">CIN CIN!</p>
+					<p class="tradition_origin">(Italy)</p>
+				</div>
+				<div class="tradition_buttons">
+					<div class="button" id="tradition_learnmore">
+						<p>LEARN MORE</p>
+					</div>
+					<div class="button" id="tradition_gotit">
+						<p>GOT IT!</p>
+					</div>
+				</div>
+			</div>
+			<div id="tradition_extended">
+				<div class="tradition_text">
+					<p class="tradition_title">CIN CIN!</p>
+					<p class="tradition_origin">(Italy)</p>
+				</div>
+				<div id="tradition_video"> </div>
+				<div id="tradition_info">
+					In Italy.... Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+					
+					Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+				</div>
+				<div class="tradition_buttons">
+					<div class="button" id="tradition_gotit2">
+						<p>GOT IT!</p>
+					</div>
+				</div>
+			</div>
 			
-			$('#logininterface').hide();
-			$('#room_code').text(c);
-			$('#introtext').text("Share the room code with your friends:");
-		});
-	
-      socket.on("writemessage", function (msg) {
-		  $('#message').append("<br/>"+msg);
-      });
+			<div id="tradition_idle">
+				<p class="tradition_idle_intro">NOW THAT YOU KNOW ALL ABOUT “<span id="tradition_idle_nameoftradition"> </span>", IT’S TIME FOR YOU TO TRY IT OUT! WHENEVER YOU FEEL YOU WANT TO</p>
+				<div class="button" id="tradition_searchagain">
+					<p>SEARCH AGAIN</p>
+				</div>
+				<p class="tradition_idle_intro">PRESS THIS BUTTON OR THE ONE BELOW TO FIND</p>
+				<div class="button" id="tradition_similar">
+					<p>SIMILAR TRADITIONS</p>
+				</div>
+				<p class="tradition_idle_intro">IF YOU WANT, YOU CAN ALSO</p>
+				<div class="button" id="tradition_ratetradition">
+					<p>RATE THIS TRADITION</p>
+				</div>
+			</div>
+			<div id="tradition_rate">
+				tradition_rate
+			</div>
+		</div>
 		
-	  socket.on("updateplayers", function (msg) {
-		  nPlayers = msg;
-		  if(activePlayers==1) activePlayers = msg;
-		  $('#playersInTheRoom').text(nPlayers);
-		  $('#activePlayers').text(activePlayers);
-      });
+		<div id="search">
+			<p class="search_intro">What kind of food tradition would you like to explore?</p>
+			<input type="text" id="input_search" value="type a search keyword" onchange="search()">
+		</div>
 		
-	  socket.on("updateactiveplayers", function (msg) {
-		  activePlayers = msg;
-		  $('#activePlayers').text(activePlayers);
-      });
+		<div id="results">
+			<p class="results_intro">Results for: </p>
+			<div class="result" id="result1">
+				<p>Name of tradition</p>
+			</div>
+			<div class="result" id="result2">
+				<p>Name of tradition</p>
+			</div>
+			<div class="result" id="result3">
+				<p>Name of tradition</p>
+			</div>
+		</div>
 		
-	  socket.on("hidelogin", function (msg) {
-		  $('#logininterface').hide();
-		  $('#room_code').text(c);
-		  $('#introtext').text("Share the room code with your friends:");
-      });	
-		
-	$(window).blur(function(){
-		socket.emit("gounactive", activePlayers);
-	});
-	$(window).focus(function(){
-		socket.emit("goactive", activePlayers);
-	});	
-		
-    </script>
-  </body>
+	</div>
+</body>
 </html>

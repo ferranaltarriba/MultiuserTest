@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>PlaceMap</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+	<p>v2</p>
+	<!-- Room code mechanism -->  
+	<div id="logininfo">
+		<p id="introtext">Share this code with your friends:</p>
+		<p id="room_code"></p>
+	</div>
+	<div id="logininterface">  
+		<input type="text" id="codeinput" value="enter your friend's code here">
+		<input type="submit" id="codesubmit" value="submit">
+	</div>
+	  
+	<br/>
+	  <p>PLAYERS IN THE ROOM: <span id="playersInTheRoom">1</span></p>
+	  <p>ACTIVE PLAYERS IN THE ROOM: <span id="activePlayers">1</span></p>
+	<br/>
+	<p>MESSAGES: <span id="message"></span></p>   
+
+    <!-- Client Code    -->
+    <script type="text/javascript">
+		
+		var nPlayers = 1;
+		var activePlayers = 1;
+		
+		//Define random room code
+		
+		function makeid(length) {
+		   var result           = '';
+		   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+		   var charactersLength = characters.length;
+		   for ( var i = 0; i < length; i++ ) {
+			  result += characters.charAt(Math.floor(Math.random() * charactersLength));
+		   }
+		   return result;
+		}		
+		var randomCode = makeid(5);
+		$('#room_code').text(randomCode);	
+			
+      // Get WebSocket
+      var socket = io();
+		
+      // Get DOM elements
+      var input = document.getElementById("input");
+      var output = document.getElementById("output");
+		
+      // Join a channel
+      var room = randomCode;
+      socket.emit("join", room);		
+	
+	  // Code for joining session with someone else's code
+		
+		$('#codesubmit').on('click', function() {
+			var c = $('#codeinput').val();
+			
+			socket.emit("join", c);
+			
+			$('#logininterface').hide();
+			$('#room_code').text(c);
+			$('#introtext').text("Share the room code with your friends:");
+		});
+	
+      socket.on("writemessage", function (msg) {
+		  $('#message').append("<br/>"+msg);
+      });
+		
+	  socket.on("updateplayers", function (msg) {
+		  nPlayers = msg;
+		  if(activePlayers==1) activePlayers = msg;
+		  $('#playersInTheRoom').text(nPlayers);
+		  $('#activePlayers').text(activePlayers);
+      });
+		
+	  socket.on("updateactiveplayers", function (msg) {
+		  activePlayers = msg;
+		  $('#activePlayers').text(activePlayers);
+      });
+		
+	  socket.on("hidelogin", function (msg) {
+		  $('#logininterface').hide();
+		  $('#room_code').text(c);
+		  $('#introtext').text("Share the room code with your friends:");
+      });	
+		
+	$(window).blur(function(){
+		socket.emit("gounactive", activePlayers);
+	});
+	$(window).focus(function(){
+		socket.emit("goactive", activePlayers);
+	});	
+		
+    </script>
+  </body>
+</html>
