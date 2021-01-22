@@ -7,6 +7,7 @@ const port = 6969;
 const server = http.createServer(express);
 const wss = new WebSocket.Server({ server })
 
+
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(data) {
     wss.clients.forEach(function each(client) {
