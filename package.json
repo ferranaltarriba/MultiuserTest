@@ -1,11 +1,21 @@
 {
-  "name": "rtm",
-  "version": "0.0.1",
+  "name": "test2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "12.17.x"
+  },
   "scripts": {
     "start": "node server.js"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
+    "bufferutil": "^4.0.3",
     "express": "^4.17.1",
+    "utf-8-validate": "^5.0.4",
     "ws": "^7.4.2"
   }
 }
