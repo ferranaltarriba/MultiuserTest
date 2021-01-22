@@ -22,7 +22,8 @@ window.onload = load;
       ws.close();
     }
 
-    ws = new WebSocket('ws://localhost:6969');
+    HOST = location.origin.replace(/^http/, 'ws')
+	ws = new WebSocket(HOST);
     ws.onopen = () => {
       console.log('Connection opened!');
     }
