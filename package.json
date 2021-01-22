@@ -1,6 +1,9 @@
 {
   "name": "rtm",
   "version": "0.0.1",
+  "engines": {
+    "node": "14.15.x"
+  },
   "scripts": {
     "start": "node server.js"
   },
