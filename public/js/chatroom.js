@@ -1,5 +1,5 @@
 (function connect(){
-  let socket = io.connect('https://placemap.herokuapp.co')
+  let socket = io.connect('https://placemap.herokuapp.com')
 
   let username = document.querySelector('#username')
   let usernameBtn = document.querySelector('#usernameBtn')
